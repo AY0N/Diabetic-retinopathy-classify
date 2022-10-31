@@ -1,4 +1,4 @@
-package com.google.tflite.dretinopathy.tflite
+package com.google.tflite.drdetection.tflite
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap
