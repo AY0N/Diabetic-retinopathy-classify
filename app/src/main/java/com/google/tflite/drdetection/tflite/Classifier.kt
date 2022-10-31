@@ -85,33 +85,10 @@ class Classifier(assetManager: AssetManager, modelPath: String, labelPath: Strin
         }
         return byteBuffer
     }
-
-    private fun getSortedResult(labelProbArray: Array<FloatArray>): List<Recognition> {
-        Log.d("Classifier", "List Size:(%d, %d, %d)".format(labelProbArray.size,labelProbArray[0].size,lableList.size))
-
-        val pq = PriorityQueue(
-            maxResult,
-            Comparator<Recognition> {
-                    (_, _, confidence1), (_, _, confidence2)
-                -> confidence1.compareTo(confidence2) * -1
-            })
-
-        for (i in lableList.indices) {
-            val confidence = labelProbArray[0][i]
-            if (confidence >= threshHold) {
-                pq.add(Recognition("" + i,
-                    if (lableList.size > i) lableList[i] else "Unknown", confidence)
                 )
             }
         }
-        Log.d("Classifier", "pqsize:(%d)".format(pq.size))
-
-        val recognitions = ArrayList<Recognition>()
-        val recognitionsSize = min(pq.size, maxResult)
-        for (i in 0 until recognitionsSize) {
-            recognitions.add(pq.poll())
-        }
-        return recognitions
+     
     }
 
 }
